@@ -1,4 +1,5 @@
 # import the necessary packages
+import pytesseract 
 from imutils.video import VideoStream
 from imutils.video import FPS
 from imutils.object_detection import non_max_suppression
@@ -7,6 +8,7 @@ import argparse
 import imutils
 import time
 import cv2
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def decode_predictions(scores, geometry):
 	# grab the number of rows and columns from the scores volume, then
