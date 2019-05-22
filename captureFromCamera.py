@@ -35,6 +35,7 @@ while(True):
 
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
     if (time.time() >= oldTime+waitTime and willPredict==False):
         oldTime=time.time() 
         willPredict=True
@@ -48,7 +49,7 @@ while(True):
         else:
             print("the lenght of the predicted text is :",charLen,"it needs to be at least 200")
         if(len(result) >= minChars):
-            file=open("textAra",'w',encoding='utf_8')
+            file=open("textAra.txt",'w',encoding='utf_8')
             result =cleanText(result)
             file.write(result)
             willPredict=False
