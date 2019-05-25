@@ -18,7 +18,7 @@ lineType               = 2
 
 waitTime=5
 minChars=200
-
+language=["ara","ar"]
 oldTime=time.time()
 willPredict=False
 resultText=""
@@ -35,12 +35,12 @@ while(True):
 
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    gray = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
+    gray = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 9, 10)
     if (time.time() >= oldTime+waitTime and willPredict==False):
         oldTime=time.time() 
         willPredict=True
     if willPredict:
-        result = pytesseract.image_to_string(gray,lang="ara")
+        result = pytesseract.image_to_string(gray,lang=language[0])
         gray = cv2.putText(gray,result, bottomLeftCornerOfText,font,fontScale,fontColor,lineType)
 
         charLen=len(result)
@@ -49,6 +49,7 @@ while(True):
         else:
             print("the lenght of the predicted text is :",charLen,"it needs to be at least 200")
         if(len(result) >= minChars):
+            cv2.imwrite("currentFrame.jpg",gray)
             file=open("textAra.txt",'w',encoding='utf_8')
             result =cleanText(result)
             file.write(result)
@@ -64,5 +65,5 @@ while(True):
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-tts=gTTS(resultText,lang='ar')
+tts=gTTS(resultText,lang=language[1])
 tts.save('finalAudio.mp3')
