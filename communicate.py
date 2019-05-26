@@ -48,4 +48,3 @@ def communicate():
         toggleState("idle")
         if(command=="رجوع"):
             comunicating=False
-communicate()
