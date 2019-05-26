@@ -1,18 +1,60 @@
 from playsound import playsound
+import speech_recognition as sr
 import os,threading,asyncio
 from gtts import gTTS
-import animate,behaviours
+import animate,behaviours,commandHelper,dateRecognition,setAppointment,getAppointment
 
-rcvCommand="اقرئي هدا النص".split(" ")
-
+#Animation thread
 animThread=threading.Thread(target=animate.Animate)
-animThread.start()
+#animThread.start()
 
-if "اقرئي" in rcvCommand and "النص" in rcvCommand:
-    behaviours.readImgText()
-else:
-    toggleState("talk")
-    playsound("audioBase/unknownCmdSp.mp3")
-    toggleState("idle")
+#main Ai loop
+justStarted=True
+if justStarted:
+    commandHelper.toggleState("talk")
+    playsound("audioBase/startingSp.mp3")
+    commandHelper.toggleState("idle")
+
+
+#waitForCommand
+r=sr.Recognizer()
+
+#ExecuteCommand
+
+while(True):
+    text=""
+    if not justStarted:
+        commandHelper.toggleState("talk")
+        playsound("audioBase/idleSp.mp3")
+        commandHelper.toggleState("idle")
+
+    with sr.Microphone() as source:
+        audio=r.listen(source)
+    try:
+        text=r.recognize_google(audio,language='ar')
+        #file=open("misc/debug/yourCommand.txt","w",encoding="utf_8")
+        #file.write(text)
+        #file.close()
+    except:
+        pass
+    rcvCommand=text.split(" ")
+    readCnd=commandHelper.checkReadTextCondition(rcvCommand)
+    dateCnd=commandHelper.checkDateTextCondition(rcvCommand)
+    setDateCnd=commandHelper.checkSetAppointmentCondition(rcvCommand)
+    getDateCnd=commandHelper.checkGetAppointmentCondition(rcvCommand)
+    if readCnd:
+        behaviours.readImgText()
+    elif dateCnd:
+        dateRecognition.getToday()
+    elif setDateCnd:
+        setAppointment.setAppointment(text)
+    elif getDateCnd:
+        getAppointment.getAppointment()
+    elif text!="":
+        commandHelper.toggleState("talk")
+        playsound("audioBase/unknownCmdSp.mp3")
+        commandHelper.toggleState("idle")
+    if justStarted:
+        justStarted=False
 
 
