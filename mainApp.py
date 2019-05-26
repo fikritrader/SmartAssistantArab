@@ -2,11 +2,13 @@ from playsound import playsound
 import speech_recognition as sr
 import os,threading,asyncio
 from gtts import gTTS
-import animate,behaviours,commandHelper,dateRecognition,setAppointment,getAppointment
+import animate,behaviours,commandHelper
+import dateRecognition,setAppointment
+import getAppointment,communicate
 
 #Animation thread
 animThread=threading.Thread(target=animate.Animate)
-#animThread.start()
+animThread.start()
 
 #main Ai loop
 justStarted=True
@@ -42,6 +44,7 @@ while(True):
     dateCnd=commandHelper.checkDateTextCondition(rcvCommand)
     setDateCnd=commandHelper.checkSetAppointmentCondition(rcvCommand)
     getDateCnd=commandHelper.checkGetAppointmentCondition(rcvCommand)
+    comCnd=commandHelper.checkCommunicationCondition(rcvCommand)
     if readCnd:
         behaviours.readImgText()
     elif dateCnd:
@@ -50,6 +53,8 @@ while(True):
         setAppointment.setAppointment(text)
     elif getDateCnd:
         getAppointment.getAppointment()
+    elif comCnd:
+        communicate.communicate()
     elif text!="":
         commandHelper.toggleState("talk")
         playsound("audioBase/unknownCmdSp.mp3")

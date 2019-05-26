@@ -3,8 +3,8 @@ from io import BytesIO
 from playsound import playsound
 import readImageText
 
-text="ليس لَدَيْكَ مَوْعِدٌ"
-name="noAppointmentSp"
+text="حسَنًا سأتحدث معكْ"
+name="willSpeakSp"
 
 
 tts=gTTS(text,"ar")

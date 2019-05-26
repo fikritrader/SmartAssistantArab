@@ -11,7 +11,7 @@ TextQuestionWithIndex = " "
 TextAnswerWithIndex = " "
 language=["ara","ar"]
 
-file=open("TexteToCommunique.txt",'r',encoding='utf_8')
+file=open("misc/dialogueText.txt",'r',encoding='utf_8')
 text=file.read()
 TextWithoutAt = text.split("@")
 print(len(TextWithoutAt))
