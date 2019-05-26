@@ -38,14 +38,17 @@ def communicate():
             textSplitByHashA = answers.split("#")
             if index == textSplitByHashA[1]:
                 NewArrayAnswers.append(textSplitByHashA[0])   
-
-        varRand = random.randint(0, len(NewArrayAnswers))
-        ans = NewArrayAnswers[varRand]
-        tts=gTTS(ans,lang="ar")
-        tts.save('audioBase/finalAudioAnswer.mp3')
-        toggleState("talk")
-        playsound("audioBase/finalAudioAnswer.mp3")
-        toggleState("idle")
+        if len(NewArrayAnswers)>0:
+            varRand = random.randint(0, len(NewArrayAnswers))
+            ans = NewArrayAnswers[varRand]
+            tts=gTTS(ans,lang="ar")
+            tts.save('audioBase/finalAudioAnswer.mp3')
+            toggleState("talk")
+            playsound("audioBase/finalAudioAnswer.mp3")
+            toggleState("idle")
+        else:
+            toggleState("talk")
+            playsound("audioBase/noUnderstandSp.mp3")
+            toggleState("idle")
         if(command=="رجوع"):
             comunicating=False
-communicate()
