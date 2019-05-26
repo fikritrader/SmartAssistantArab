@@ -13,8 +13,7 @@ try:
     print(text)
 except:
     pass
-repns = "  قم بقول الشهرايضا "
-
+repns = "قم بقول الشهرايضا "
 
 cmdarr=text.split(" ")
 # cmdarr=noveau_text.split(" ")
