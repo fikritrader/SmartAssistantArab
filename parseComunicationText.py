@@ -1,5 +1,7 @@
 import random
 from gtts import gTTS
+import speech_recognition as sr
+from playsound import playsound
 
 questionArray = []
 answersArray = []
@@ -29,7 +31,18 @@ for st in TextWithoutAt:
         answersArray.append(TextAnswerWithIndex)
     index = index+1
 
-commande = "مرحبا"
+r=sr.Recognizer()
+with sr.Microphone() as source:
+    print("say somethng")
+    audio=r.listen(source)
+    print("time over, thanks")
+try:
+    commande=r.recognize_google(audio,language='ar')
+    print("this is the thing you said" + commande)
+except:
+    pass
+
+#commande = "مرحبا"
 print("this is the lenght of question array"+str(questionArray))
 for question in questionArray:
     textSplitByHashQ = question.split("#")
