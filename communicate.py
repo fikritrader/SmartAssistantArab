@@ -1,4 +1,4 @@
-import json ,random
+import json ,random,os
 from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr
@@ -7,7 +7,6 @@ from commandHelper import toggleState
 def communicate():
     file=open("misc/parsedDialogue.json","r")
     dialogue=json.load(file)
-    NewArrayAnswers = []
     questionArray = dialogue[0]
     answersArray = dialogue[1]
     toggleState("talk")
@@ -15,8 +14,11 @@ def communicate():
     toggleState("idle")
     print("will start the main loop")
     comunicating=True
+    i=0
     while comunicating:
+        NewArrayAnswers=[]
         index=-1
+        i=i+1
         r=sr.Recognizer()
         with sr.Microphone() as source:
             print("say something")
@@ -39,13 +41,14 @@ def communicate():
             if index == textSplitByHashA[1]:
                 NewArrayAnswers.append(textSplitByHashA[0])   
         if len(NewArrayAnswers)>0:
-            varRand = random.randint(0, len(NewArrayAnswers))
+            varRand = random.randint(0, len(NewArrayAnswers)-1)
             ans = NewArrayAnswers[varRand]
             tts=gTTS(ans,lang="ar")
-            tts.save('audioBase/finalAudioAnswer.mp3')
+            tts.save('audioBase/finalAudioAnswer'+str(i)+'.mp3')
             toggleState("talk")
-            playsound("audioBase/finalAudioAnswer.mp3")
+            playsound("audioBase/finalAudioAnswer"+str(i)+".mp3")
             toggleState("idle")
+            os.remove('audioBase/finalAudioAnswer'+str(i)+'.mp3')
         else:
             toggleState("talk")
             playsound("audioBase/noUnderstandSp.mp3")
