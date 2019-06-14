@@ -2,7 +2,7 @@ from playsound import playsound
 import speech_recognition as sr
 import os,threading,asyncio
 from gtts import gTTS
-import animate,behaviours,commandHelper
+import animate,readText,commandHelper
 import dateRecognition,setAppointment
 import getAppointment,communicate
 
@@ -46,7 +46,7 @@ while(True):
     getDateCnd=commandHelper.checkGetAppointmentCondition(rcvCommand)
     comCnd=commandHelper.checkCommunicationCondition(rcvCommand)
     if readCnd:
-        behaviours.readImgText()
+        readText.readImgText()
     elif dateCnd:
         dateRecognition.getToday()
     elif setDateCnd:
