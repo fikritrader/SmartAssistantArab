@@ -2,12 +2,12 @@ from datetime import datetime
 from gtts import gTTS
 from playsound import playsound
 import re
-from commandHelper import toggleState
+from states.commandHelper import toggleState
 
 def getAppointment():
     foundAppointment=False
     appointments=open("misc/appointments.txt","r",encoding="utf_8").readlines()
-    forbid=["سجل","تسجيل","موعد","يوم","\ufeffسجل","\ufeffتسجيل"]
+    forbid=["سجل","تسجيل","موعد","يوم","\ufeffسجل","\ufeffتسجيل","سجلي","حجز","تسجلي","لقاء"]
     for line in appointments :
         digitsInLine=[]
         digitsInLine=re.findall('\d+', line)

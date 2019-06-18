@@ -62,34 +62,3 @@ for i,word in enumerate(dictionnaryAns):
     ansWordToInt[word] = i
     ansIntToWord[i]    = word
 
-timeBeforData=time.time()
-dataSetMatrix=[Questions,Answers]
-t = Tokenizer()
-t.fit_on_texts(dataSetMatrix)
-print('the lenght of the question dictionary is :',len(dictionnaryQues))
-print('the lenght of the answer dictionary is :',len(dictionnaryAns))
-
-# summarize what was learned
-open('file.txt','w',encoding="utf_8").write(str(t.word_counts))
-
-#finalArray for questions
-#dataMatrix=np.zeros((10,len(dictionnaryQues)),dtype="int8")
-#for i in range(0,10):
-#    print("generating the line {} of the questions data matrix".format(i))
-#    vector=np.zeros((len(dictionnaryQues)),dtype="int8")
-#    for word in Questions[i].split(' '):
-#        vector[quesWordToInt[word]]=1
-#    dataMatrix[i,:]=vector
-
-#sparseDataMatrix=sparse.csr_matrix(dataMatrix)
-#file=open("chatModel/data/dataMarix.json","w",encoding="utf_8")
-#json.dump(sparseDataMatrix.tolist(),file)
-#file.close()
-#print(sparseDataMatrix)
-#print(dataMatrix.shape)
-
-maxWords=10000
-
-timeNeeded=time.time()-timeBeforData
-print("it took :",str(round(timeNeeded,2)),"sec to finish the data making")
-tokenize=Tokenizer()

@@ -1,10 +1,9 @@
 from gtts import gTTS
 from io import BytesIO
 from playsound import playsound
-import readImageText
 
-text="لم أفهم"
-name="noUnderstandSp"
+text="زوبيدا"
+name="nameSp"
 
 
 tts=gTTS(text,"ar")

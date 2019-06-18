@@ -2,7 +2,7 @@ import json ,random,os
 from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr
-from commandHelper import toggleState
+from states.commandHelper import toggleState
 
 def communicate():
     file=open("misc/parsedDialogue.json","r")
