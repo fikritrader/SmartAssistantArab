@@ -23,6 +23,6 @@ def checkCommunicationCondition(command):
     cmdCndt=cmdCndt and "معي" in command or "مع" in command
     return cmdCndt
 def checkSilence(command):
-    cmdCndt= "اوسمتي" in command or "اصمتي" in command or "اسمتي" in command or "اسمطي" in command or "اسكتي" in command
+    cmdCndt= "اوسمتي" in command or "اصمتي" in command or "اسمتي" in command or "اسمطي" in command or "اسكتي" in command or "أريد" in command
     return cmdCndt
     

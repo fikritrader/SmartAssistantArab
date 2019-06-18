@@ -2,7 +2,7 @@ from gtts import gTTS
 from io import BytesIO
 from playsound import playsound
 
-text="زوبيدا"
+text=" زوبيدا breaking bad" 
 name="nameSp"
 
 

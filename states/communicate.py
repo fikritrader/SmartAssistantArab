@@ -29,6 +29,10 @@ def communicate():
         except:
             pass
         file=open("misc/debug/dialogueSp.txt","w",encoding="utf_8")
+        command=command.replace('أ','ا')
+        command=command.replace('إ','ا')
+        command=command.replace('آ','ا')
+        command=command.replace('ة','ه')
         file.write(command)
         file.close()
         for question in questionArray:
