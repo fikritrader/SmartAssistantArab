@@ -1,6 +1,7 @@
 from playsound import playsound
 from gtts import gTTS
-import readImageText,commandHelper
+import states.readImageText as readImageText
+import states.commandHelper as commandHelper
 
 
 def readImgText():

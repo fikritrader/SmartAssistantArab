@@ -2,9 +2,9 @@ import os
 import time
 
 def Animate():
-    blink = ['misc/animation/woman-blink-0.txt','misc/animation/woman-blink-1.txt']
+    blink = ['misc/animation/blink-0.txt','misc/animation/blink-1.txt']
     durationBlink=[1,0.3]
-    talk = ['misc/animation/woman-talk-1.txt','misc/animation/woman-talk-0.txt']
+    talk = ['misc/animation/talk-1.txt','misc/animation/talk-0.txt']
     durationTalk=[.2,.1]
     framesBlink = []
     framesTalk = []

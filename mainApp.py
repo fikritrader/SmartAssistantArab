@@ -2,9 +2,13 @@ from playsound import playsound
 import speech_recognition as sr
 import os,threading,asyncio
 from gtts import gTTS
-import animate,readText,commandHelper
-import dateRecognition,setAppointment
-import getAppointment,communicate
+import animate
+import states.readText as readText
+import states.commandHelper as commandHelper
+import dateRecognition
+import states.setAppointment as setAppointment
+import states.getAppointment as getAppointment
+import states.communicate as communicate
 
 #Animation thread
 animThread=threading.Thread(target=animate.Animate)
@@ -34,9 +38,9 @@ while(True):
         audio=r.listen(source)
     try:
         text=r.recognize_google(audio,language='ar')
-        #file=open("misc/debug/yourCommand.txt","w",encoding="utf_8")
-        #file.write(text)
-        #file.close()
+        file=open("misc/debug/yourCommand.txt","w",encoding="utf_8")
+        file.write(text)
+        file.close()
     except:
         pass
     rcvCommand=text.split(" ")
@@ -45,6 +49,7 @@ while(True):
     setDateCnd=commandHelper.checkSetAppointmentCondition(rcvCommand)
     getDateCnd=commandHelper.checkGetAppointmentCondition(rcvCommand)
     comCnd=commandHelper.checkCommunicationCondition(rcvCommand)
+    exitCnd=commandHelper.checkSilence(rcvCommand)
     if readCnd:
         readText.readImgText()
     elif dateCnd:
@@ -55,6 +60,11 @@ while(True):
         getAppointment.getAppointment()
     elif comCnd:
         communicate.communicate()
+    elif exitCnd:
+        commandHelper.toggleState("talk")
+        playsound("audioBase/bySp.mp3")
+        commandHelper.toggleState("idle")
+        break;
     elif text!="":
         commandHelper.toggleState("talk")
         playsound("audioBase/unknownCmdSp.mp3")

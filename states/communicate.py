@@ -2,7 +2,7 @@ import json ,random,os
 from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr
-from commandHelper import toggleState
+from states.commandHelper import toggleState
 
 def communicate():
     file=open("misc/parsedDialogue.json","r")
@@ -29,6 +29,10 @@ def communicate():
         except:
             pass
         file=open("misc/debug/dialogueSp.txt","w",encoding="utf_8")
+        command=command.replace('أ','ا')
+        command=command.replace('إ','ا')
+        command=command.replace('آ','ا')
+        command=command.replace('ة','ه')
         file.write(command)
         file.close()
         for question in questionArray:

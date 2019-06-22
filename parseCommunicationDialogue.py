@@ -12,10 +12,15 @@ TextWithoutAt = text.split("@")
 print(len(TextWithoutAt))
 for st in TextWithoutAt:
     print("iteration")
+    
     TextWithoutTir = st.split("-")
     TextQuestionSplit = TextWithoutTir[0].split(":")
     for question in TextQuestionSplit:
         print("this is the lenght"+str(len(questionArray)))
+        question=question.replace('إ','ا')
+        question=question.replace('آ','ا')
+        question=question.replace('أ','ا')
+        question=question.replace('ة','ه')
         TextQuestionWithIndex = question+"#"+str(index)
         questionArray.append(TextQuestionWithIndex)
     
