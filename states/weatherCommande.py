@@ -1,13 +1,9 @@
 import pywapi
 from gtts import gTTS
-import speech_recognition as sr
 from playsound import playsound
+from states.commandHelper import toggleState
 
-language=["ara","ar"]
-r=sr.Recognizer()
-
-
-def main():
+def getWeather():
     #print("Enter a city name for weather forecast : ")
     #cityName = input()
     cityName = "Morocco"
@@ -31,17 +27,22 @@ def main():
         textWeather = "غائم جزئيا"
     elif textWeather == "Cloudy":
         textWeather = "غائم"
+    elif textWeather == "Raining":
+        textWeather = "ممطر"
+    elif textWeather == "Rainy":
+        textWeather = "ممطر"
     elif textWeather == "Sunny":
         textWeather = "مشمس"
     elif textWeather == "Mostly Sunny":
         textWeather = "في الغالب مشمس"
     else:
-        textWeather = "معتدل"
+        textWeather = "معتدِل"
 
-    mystring= "الجو حاليا يصل إلى"+temperature+"درجة  أما فيما يخص أقصى درجة حرارة فاليوم ستصل إلى"+HightTemp+"درجة  و أدنى درجة حرارة هي"+LowTemp+" درجة  و إنطلاقا من المعطيات يمكن القول أن الجو"+textWeather
+    mystring= "الجو حالياً يصل إلى"+temperature+"درجة  أما فيما يخص أقصى درجة حرارة فاليوم ستصل إلى"+HightTemp+"درجة  و أدنى درجة حرارة هي"+LowTemp+" درجة  و إنطلاقا من المعطيات يمكن القول أن الجو"+textWeather
 
     tts=gTTS(mystring,lang="ar")
     tts.save('audioBase/AudioWeather.mp3')
+    toggleState("talk")
+    playsound("audioBase/AudioWeather.mp3")
+    toggleState("idle")
     
-if __name__ == "__main__":
-    main()

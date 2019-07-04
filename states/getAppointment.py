@@ -7,7 +7,7 @@ from states.commandHelper import toggleState
 def getAppointment():
     foundAppointment=False
     appointments=open("misc/appointments.txt","r",encoding="utf_8").readlines()
-    forbid=["سجل","تسجيل","موعد","يوم","\ufeffسجل","\ufeffتسجيل","سجلي","حجز","تسجلي","لقاء"]
+    forbid=["سجل","تسجيل","موعد","يوم","\ufeffسجل","\ufeffتسجيل","سجلي","حجز","تسجلي","لقاء","تجلى"]
     for line in appointments :
         digitsInLine=[]
         digitsInLine=re.findall('\d+', line)

@@ -9,10 +9,11 @@ import dateRecognition
 import states.setAppointment as setAppointment
 import states.getAppointment as getAppointment
 import states.communicate as communicate
-
+import states.weatherCommande as weatherCommande
+import chat
 #Animation thread
 animThread=threading.Thread(target=animate.Animate)
-animThread.start()
+#animThread.start()
 
 #main Ai loop
 justStarted=True
@@ -49,7 +50,9 @@ while(True):
     setDateCnd=commandHelper.checkSetAppointmentCondition(rcvCommand)
     getDateCnd=commandHelper.checkGetAppointmentCondition(rcvCommand)
     comCnd=commandHelper.checkCommunicationCondition(rcvCommand)
+    wheatherCnd=commandHelper.checkWeather(rcvCommand)
     exitCnd=commandHelper.checkSilence(rcvCommand)
+    chatCnd=commandHelper.checkChat(rcvCommand)
     if readCnd:
         readText.readImgText()
     elif dateCnd:
@@ -60,6 +63,10 @@ while(True):
         getAppointment.getAppointment()
     elif comCnd:
         communicate.communicate()
+    elif wheatherCnd:
+        weatherCommande.getWeather()
+    elif chatCnd:
+        chat.chatEng()
     elif exitCnd:
         commandHelper.toggleState("talk")
         playsound("audioBase/bySp.mp3")

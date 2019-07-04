@@ -25,4 +25,10 @@ def checkCommunicationCondition(command):
 def checkSilence(command):
     cmdCndt= "اوسمتي" in command or "اصمتي" in command or "اسمتي" in command or "اسمطي" in command or "اسكتي" in command or "أريد" in command
     return cmdCndt
-    
+def checkWeather(command):
+    cmdCndt= "الطقس" in command or "الجو" in command 
+    return cmdCndt
+def checkChat(command):
+    cmdCndt= "باللغه" in command or "لغه" in command
+    cmdCndt=cmdCndt and "الانجليزيه" in command 
+    return cmdCndt
