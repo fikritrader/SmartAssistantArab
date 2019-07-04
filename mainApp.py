@@ -13,7 +13,7 @@ import states.weatherCommande as weatherCommande
 import chat
 #Animation thread
 animThread=threading.Thread(target=animate.Animate)
-#animThread.start()
+animThread.start()
 
 #main Ai loop
 justStarted=True
