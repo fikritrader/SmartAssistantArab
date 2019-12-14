@@ -3,7 +3,7 @@
 [Nouamane BITOR](https://github.com/nimotli/) - 
 [Zarmoum Siham](https://github.com/SihamZR) - 
 [Souad Abakarim](https://github.com/souadabakarim) - 
-[Sanae Abakarim](https://github.com/sanaeaba) - 
+[Sanae Abakarim](https://github.com/sanaeaba)
 ## Supervised by
 Professor Hajar Moussanif
 
