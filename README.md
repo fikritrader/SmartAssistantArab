@@ -20,8 +20,27 @@ then cd to it
 ```
 cd SmartAssistantArab
 ```
+Preferably create a virtual envirenment (optional but recommended)
+```
+python -m venv venv
+venv\Scripts\activate
+```
 and run 
 ```
 pip install -r requirments
+pip install misc\reqs\PyAudio-0.2.11-cp37-cp37m-win_amd64.whl  64bit systems
+pip install misc\reqs\PyAudio-0.2.11-cp37-cp37m-win32.whl  32bit systems
+cd misc\reqs\pywapi
+python setup.py build
+python setup.py install
+cd ..
+cd ..
+cd ..
 ```
-you need to have at least python 3.6 installed then you can just run 'runAI.bat' file and you're good to go
+if none of the Pyaudio whl files work for you download and install the one that works in your platform from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
+you need to have at least python 3.6 installed then you can just run 
+or 
+```
+python mainApp.py
+```
+and you're good to go

@@ -5,15 +5,15 @@ from gtts import gTTS
 import animate
 import states.readText as readText
 import states.commandHelper as commandHelper
-import dateRecognition
+import states.dateRecognition as dateRecognition
 import states.setAppointment as setAppointment
 import states.getAppointment as getAppointment
 import states.communicate as communicate
 import states.weatherCommande as weatherCommande
-import chat
+#import states.chat as chat
 #Animation thread
 animThread=threading.Thread(target=animate.Animate)
-animThread.start()
+#animThread.start()
 
 #main Ai loop
 justStarted=True

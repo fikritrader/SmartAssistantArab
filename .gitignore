@@ -1,3 +1,6 @@
 **textAra.txt
 **finalAudio.mp3
 **imgTextArSh.mp3
+venv/
+__pycache__/
+.vscode/
