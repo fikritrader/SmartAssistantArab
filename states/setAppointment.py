@@ -2,8 +2,8 @@ from gtts import gTTS
 from playsound import playsound
 from states.commandHelper import toggleState
 def setAppointment(command):
-    months=["يناير","فبراير","مارس","ابريل","ماي","يونيو","يوليوز","غشت","شتنبر","اكتوبر","نونبر","دجنبر"]
-    foundMonth=False
+    months = ["يناير","فبراير","مارس","ابريل","ماي","يونيو","يوليوز","غشت","شتنبر","اكتوبر","نونبر","دجنبر"]
+    foundMonth = False
     while(foundMonth == False):
         for month in months:
             if month in command:
@@ -18,7 +18,7 @@ def setAppointment(command):
                     f=open('misc/appointments.txt', 'ab')
                     f.write(str(appointmentText+"\n").encode('utf-8')) 
                 break
-        if foundMonth==False:
+        if foundMonth == False:
             toggleState("talk")
             playsound("audioBase/noMonthSp.mp3")     
             toggleState("idle")

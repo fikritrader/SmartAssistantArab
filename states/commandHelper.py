@@ -31,4 +31,4 @@ def checkWeather(command):
 def checkChat(command):
     cmdCndt= "باللغه" in command or "لغه" in command
     cmdCndt=cmdCndt and "الانجليزيه" in command 
-    return cmdCndt
+    return cmdCndt 
