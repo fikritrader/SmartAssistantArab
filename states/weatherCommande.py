@@ -1,6 +1,6 @@
 import pywapi
 from gtts import gTTS
-from playsound import playsound
+import states.tts as ttsUtil
 from states.commandHelper import toggleState
 
 def getWeather():
@@ -42,7 +42,8 @@ def getWeather():
 
     tts=gTTS(mystring,lang="ar")
     tts.save('audioBase/AudioWeather.mp3')
-    toggleState("talk")
-    playsound("audioBase/AudioWeather.mp3")
-    toggleState("idle")
+    # toggleState("talk")
+    # playsound("audioBase/AudioWeather.mp3")
+    # toggleState("idle")
+    ttsUtil.say('AudioWeather.mp3')
     

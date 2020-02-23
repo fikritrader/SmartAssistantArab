@@ -8,7 +8,7 @@ from tensorlayer.cost import cross_entropy_seq, cross_entropy_seq_with_mask
 from sklearn.utils import shuffle
 from tensorlayer.models.seq2seq import Seq2seq
 from gtts import gTTS
-from playsound import playsound
+import states.tts as ttsUtil
 import speech_recognition as sr
 from states.commandHelper import toggleState
 import os
@@ -68,9 +68,11 @@ def chatEng():
     load_weights = tl.files.load_npz(name='chatModel/model/model.npz')
     tl.files.assign_weights(load_weights, model_)
     
-    toggleState("talk")
-    playsound("audioBase/willSpeakSp.mp3")
-    toggleState("idle")
+    # toggleState("talk")
+    # playsound("audioBase/willSpeakSp.mp3")
+    # toggleState("idle")
+    ttsUtil.say('willSpeakSp.mp3')
+
     r=sr.Recognizer()
     indx=0
     while(True):
@@ -94,8 +96,9 @@ def chatEng():
         print('Zoubida : ',sentence)
         tts=gTTS(res,lang="en")
         tts.save('audioBase/chatSp'+str(indx)+'.mp3')
-        toggleState("talk")
-        playsound('audioBase/chatSp'+str(indx)+'.mp3')
-        toggleState("idle")
+        # toggleState("talk")
+        # playsound('audioBase/chatSp'+str(indx)+'.mp3')
+        # toggleState("idle")
+        ttsUtil.say('chatSp'+str(indx)+'.mp3')
         indx=indx+1
         

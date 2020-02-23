@@ -8,7 +8,7 @@ import states.predictIntent as predictIntent
 import states.commandHelper as commandHelper
 from gtts import gTTS
 import speech_recognition as sr
-from playsound import playsound
+import states.tts as ttsUtil
 import os
 
 numbs = ['first','second','third','fourth','fifth']
@@ -18,13 +18,15 @@ numbs = ['first','second','third','fourth','fifth']
 #-----------------------------------------------------------------
 def getStory():
     files =['moral.txt','animal.txt','classics.txt','mythology.txt','world.txt','modern.txt']
-    commandHelper.toggleState("talk")
-    playsound("audioBase/storyTeller.mp3")
-    commandHelper.toggleState("idle")
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/storyTeller.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say("storyTeller.mp3")
+
     r=sr.Recognizer()
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index=1) as source:
         print("say somethng")
-        audio=r.listen(source)
+        audio=r.listen(source,phrase_time_limit=3)
         print("time over, thanks")
     try:
         genre=r.recognize_google(audio,language='en')
@@ -35,20 +37,26 @@ def getStory():
         storiesPath = os.path.join(currentPath,'misc/stories/'+files[prediction])
         print(storiesPath)
         if os.path.isfile(storiesPath):
-            commandHelper.toggleState("talk")
-            playsound("audioBase/introducingStory.mp3")
-            commandHelper.toggleState("idle")
+            # commandHelper.toggleState("talk")
+            # playsound("audioBase/introducingStory.mp3")
+            # commandHelper.toggleState("idle")
+            ttsUtil.say("introducingStory.mp3")
+
             storyText=storyTeller.random_line(storiesPath)
             print(storyText)
-            tts = gTTS(storyText , "en")
+            tts = gTTS(storyText , lang="en")
             tts.save("audioBase/storyToRead.mp3")
-            commandHelper.toggleState("talk")
-            playsound("audioBase/storyToRead.mp3")
-            commandHelper.toggleState("idle")
+            # commandHelper.toggleState("talk")
+            # playsound("audioBase/storyToRead.mp3")
+            # commandHelper.toggleState("idle")
+            ttsUtil.say("storyToRead.mp3")
+
         else:
-            commandHelper.toggleState("talk")
-            playsound("audioBase/noStories.mp3")
-            commandHelper.toggleState("idle")
+            # commandHelper.toggleState("talk")
+            # playsound("audioBase/noStories.mp3")
+            # commandHelper.toggleState("idle")
+            ttsUtil.say("noStories.mp3")
+
     except sr.UnknownValueError:
         print("Sphinx could not understand audio")
     except sr.RequestError as e:
@@ -69,14 +77,16 @@ def getNews():
             newsString = 'the {} news article is titled {}, do you want me to use my fake news detector on this article ?'.format(numbs[i],val['title'])
             tts=gTTS(newsString,lang="en")
             tts.save('audioBase/newsAnswer'+str(i)+'.mp3')
-            commandHelper.toggleState("talk")
-            playsound('audioBase/newsAnswer'+str(i)+'.mp3')
-            commandHelper.toggleState("idle")
+            # commandHelper.toggleState("talk")
+            # playsound('audioBase/newsAnswer'+str(i)+'.mp3')
+            # commandHelper.toggleState("idle")
+            ttsUtil.say('newsAnswer'+str(i)+'.mp3')
+
             os.remove('audioBase/newsAnswer'+str(i)+'.mp3')
             r=sr.Recognizer()
-            with sr.Microphone() as source:
+            with sr.Microphone(device_index=1) as source:
                 print('say it')
-                audio=r.listen(source)
+                audio=r.listen(source,phrase_time_limit=3)
                 print('got it')
             try:
                 print('will recognize')
@@ -87,30 +97,33 @@ def getNews():
                     predictionString = 'my fake news detector says that the probability of this article being fake is {}%'.format(prediction)
                     tts=gTTS(predictionString,lang="en")
                     tts.save('audioBase/fakeNewsPred'+str(i)+'.mp3')
-                    commandHelper.toggleState("talk")
-                    playsound('audioBase/fakeNewsPred'+str(i)+'.mp3')
-                    commandHelper.toggleState("idle")
+                    # commandHelper.toggleState("talk")
+                    # playsound('audioBase/fakeNewsPred'+str(i)+'.mp3')
+                    # commandHelper.toggleState("idle")
+                    ttsUtil.say('fakeNewsPred'+str(i)+'.mp3')
                     os.remove('audioBase/fakeNewsPred'+str(i)+'.mp3')
             except:
                 pass
 
     else:   
-        commandHelper.toggleState("talk")
-        playsound("audioBase/noNews.mp3")
-        commandHelper.toggleState("idle")
+        # commandHelper.toggleState("talk")
+        # playsound("audioBase/noNews.mp3")
+        # commandHelper.toggleState("idle")
+        ttsUtil.say('noNews.mp3')
 
 #-----------------------------------------------------------------
 #this function get recipes using an ingredient through an api
 #-----------------------------------------------------------------
 def getRecipeByComp():
     r=sr.Recognizer()
-    commandHelper.toggleState("talk")
-    playsound("audioBase/recipeApiStarter.mp3")
-    commandHelper.toggleState("idle")
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/recipeApiStarter.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say('recipeApiStarter.mp3')
 
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index=1) as source:
         print('say the ingredient')
-        audio=r.listen(source)
+        audio=r.listen(source,phrase_time_limit=3)
         print('got it')
     try:
         print('will recognize')
@@ -126,14 +139,16 @@ def getRecipeByComp():
                 )
                 tts=gTTS(recipeString,lang="en")
                 tts.save('audioBase/recipeAnswer'+str(i)+'.mp3')
-                commandHelper.toggleState("talk")
-                playsound('audioBase/recipeAnswer'+str(i)+'.mp3')
-                commandHelper.toggleState("idle")
+                # commandHelper.toggleState("talk")
+                # playsound('audioBase/recipeAnswer'+str(i)+'.mp3')
+                # commandHelper.toggleState("idle")
+                ttsUtil.say('recipeAnswer'+str(i)+'.mp3')
                 os.remove('audioBase/recipeAnswer'+str(i)+'.mp3')
         else:
-            commandHelper.toggleState("talk")
-            playsound("audioBase/noRecipes.mp3")
-            commandHelper.toggleState("idle")
+            # commandHelper.toggleState("talk")
+            # playsound("audioBase/noRecipes.mp3")
+            # commandHelper.toggleState("idle")
+            ttsUtil.say('noRecipes.mp3')
     except sr.UnknownValueError:
         print("Sphinx could not understand audio")
     except sr.RequestError as e:
@@ -144,13 +159,14 @@ def getRecipeByComp():
 #-----------------------------------------------------------------
 def getMovieByTitle():
     r=sr.Recognizer()
-    commandHelper.toggleState("talk")
-    playsound("audioBase/movieApiStarter.mp3")
-    commandHelper.toggleState("idle")
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/movieApiStarter.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say('movieApiStarter.mp3')
 
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index=1) as source:
         print('say it')
-        audio=r.listen(source)
+        audio=r.listen(source,phrase_time_limit=3)
         print('got it')
     try:
         print('will recognize')
@@ -167,9 +183,10 @@ def getMovieByTitle():
         
         tts=gTTS(movieString,lang="en")
         tts.save('audioBase/movieAnswer.mp3')
-        commandHelper.toggleState("talk")
-        playsound("audioBase/movieAnswer.mp3")
-        commandHelper.toggleState("idle")
+        # commandHelper.toggleState("talk")
+        # playsound("audioBase/movieAnswer.mp3")
+        # commandHelper.toggleState("idle")
+        ttsUtil.say('movieAnswer.mp3')
         os.remove('audioBase/movieAnswer.mp3')
         with sr.Microphone() as source:
             print('say it')
@@ -182,9 +199,10 @@ def getMovieByTitle():
             if answer == 'yes':
                 tts=gTTS(filmData['plot'],lang="en")
                 tts.save('audioBase/moviePlot.mp3')
-                commandHelper.toggleState("talk")
-                playsound("audioBase/moviePlot.mp3")
-                commandHelper.toggleState("idle")
+                # commandHelper.toggleState("talk")
+                # playsound("audioBase/moviePlot.mp3")
+                # commandHelper.toggleState("idle")
+                ttsUtil.say('moviePlot.mp3')
                 os.remove('audioBase/moviePlot.mp3')
         except:
             pass
@@ -198,12 +216,13 @@ def getMovieByTitle():
 #-----------------------------------------------------------------
 def utilityState():
     r=sr.Recognizer()
-    commandHelper.toggleState("talk")
-    playsound("audioBase/utilityState.mp3")
-    commandHelper.toggleState("idle")
-    with sr.Microphone() as source:
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/utilityState.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say('utilityState.mp3')
+    with sr.Microphone(device_index=1) as source:
         print('say it')
-        audio=r.listen(source)
+        audio=r.listen(source,phrase_time_limit=3)
         print('got it')
     try:
         print('will recognize')

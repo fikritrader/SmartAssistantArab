@@ -1,4 +1,3 @@
-from playsound import playsound
 import speech_recognition as sr
 import os,threading,asyncio
 from gtts import gTTS
@@ -12,18 +11,20 @@ import states.communicate as communicate
 #import states.weatherCommande as weatherCommande
 import states.predictIntent as predictIntent
 import states.utilityState as utilityState
+import states.tts as ttsUtil
 #import states.chat as chat
 #Animation thread
+input()
 animThread=threading.Thread(target=animate.Animate)
 #animThread.start()
 
 #main Ai loop
-justStarted=True
+justStarted=False
 if justStarted:
-    commandHelper.toggleState("talk")
-    playsound("audioBase/startingSp.mp3")
-    commandHelper.toggleState("idle")
-
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/startingSp.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say("startingSp.mp3")
 
 #waitForCommand
 r=sr.Recognizer()
@@ -33,17 +34,17 @@ intents = ['speak','weather','remind me','schedule today','silence','read this',
 while(True):
     text=""
     if not justStarted:
-        commandHelper.toggleState("talk")
-        playsound("audioBase/idleSp.mp3")
-        commandHelper.toggleState("idle")
-
-    with sr.Microphone() as source:
+        # commandHelper.toggleState("talk")
+        # playsound("audioBase/idleSp.mp3")
+        # commandHelper.toggleState("idle")
+        ttsUtil.say("idleSp.mp3")
+    with sr.Microphone(device_index=1) as source:
         print('speak')
-        audio=r.listen(source)
+        audio=r.listen(source,phrase_time_limit=3)
     try:
-        #text = input('your command : \n')
+        text = input('your command : \n')
         print('got it will now recognize')
-        text=r.recognize_google(audio,language='ar')
+        #text=r.recognize_google(audio,language='ar')
         print('recognized')
         file=open("misc/debug/yourCommand.txt","w",encoding="utf_8")
         file.write(text)

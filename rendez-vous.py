@@ -1,8 +1,11 @@
+#--------------#
+#--DEPRECATED--#
+#--------------#
 import speech_recognition as sr
 import re
 from datetime import datetime
 from gtts import gTTS
-from playsound import playsound
+import playsound
 r=sr.Recognizer()
 with sr.Microphone() as source:
     print("say somethng")
@@ -41,6 +44,7 @@ for i in cmdarr:
                         tts=gTTS(repns1,"ar")
                         tts.save("audioBase/repns1.mp3")     
                         playsound("audioBase/repns1.mp3")
+                        
                         f=open('monfichier.txt', 'ab')
                         f.write(str(noveau_text+"\n").encode('utf-8')) 
                     break

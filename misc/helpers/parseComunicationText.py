@@ -1,7 +1,7 @@
 import random
 from gtts import gTTS
 import speech_recognition as sr
-from playsound import playsound
+import states.tts as ttsUtil
 
 questionArray = []
 answersArray = []

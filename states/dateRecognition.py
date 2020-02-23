@@ -1,7 +1,7 @@
 import datetime,re
 import states.commandHelper as commandHelper
 from gtts import gTTS
-from playsound import playsound
+import states.tts as ttsUtil
 
 def getToday():
     todaytime =  datetime.datetime.now()
@@ -14,6 +14,7 @@ def getToday():
     text = "اليوم هو"+date[2]+ " من "+day+ " لعام  "+date[0]+ "والسَاعةُ تشير إلى"+date[3]+ "وَ"+date[4]+"دقيقة"
     tts = gTTS(text=text, lang='ar')
     tts.save("audioBase/dateTime.mp3")
-    commandHelper.toggleState("talk")
-    playsound("audioBase/dateTime.mp3")
-    commandHelper.toggleState("idle")
+    # commandHelper.toggleState("talk")
+    # playsound("audioBase/dateTime.mp3")
+    # commandHelper.toggleState("idle")
+    ttsUtil.say("dateTime.mp3")

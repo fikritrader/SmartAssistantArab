@@ -1,17 +1,18 @@
 import json ,random,os
 from gtts import gTTS
-from playsound import playsound
 import speech_recognition as sr
 from states.commandHelper import toggleState
+import states.tts as ttsUtil
 
 def communicate():
     file=open("misc/parsedDialogue.json","r")
     dialogue=json.load(file)
     questionArray = dialogue[0]
     answersArray = dialogue[1]
-    toggleState("talk")
-    playsound("audioBase/willSpeakSp.mp3")
-    toggleState("idle")
+    # toggleState("talk")
+    # playsound("audioBase/willSpeakSp.mp3")
+    # toggleState("idle")
+    ttsUtil.say("willSpeakSp.mp3")
     print("will start the main loop")
     comunicating=True
     i=0
@@ -49,13 +50,16 @@ def communicate():
             ans = NewArrayAnswers[varRand]
             tts=gTTS(ans,lang="ar")
             tts.save('audioBase/finalAudioAnswer'+str(i)+'.mp3')
-            toggleState("talk")
-            playsound("audioBase/finalAudioAnswer"+str(i)+".mp3")
-            toggleState("idle")
+            # toggleState("talk")
+            # playsound("audioBase/finalAudioAnswer"+str(i)+".mp3")
+            # toggleState("idle")
+            ttsUtil.say("finalAudioAnswer.mp3")
+
             os.remove('audioBase/finalAudioAnswer'+str(i)+'.mp3')
         else:
-            toggleState("talk")
-            playsound("audioBase/noUnderstandSp.mp3")
-            toggleState("idle")
+            # toggleState("talk")
+            # playsound("audioBase/noUnderstandSp.mp3")
+            # toggleState("idle")
+            ttsUtil.say("noUnderstandSp.mp3")
         if(command=="رجوع"):
             comunicating=False

@@ -1,6 +1,6 @@
 from datetime import datetime
 from gtts import gTTS
-from playsound import playsound
+import states.tts as ttsUtil
 import re
 from states.commandHelper import toggleState
 
@@ -24,12 +24,15 @@ def getAppointment():
                 if not word in forbid and not(word.isdecimal()):
                     appointmentType = appointmentType + " " + word
             outpuText="نَعَمْ لَدَيْكَ مَوْعِدٌ "+appointmentType
-            tts=gTTS(outpuText,"ar")
+            tts=gTTS(outpuText,lang="ar")
             tts.save("audioBase/appointmentTempSp.mp3")     
-            toggleState("talk")
-            playsound("audioBase/appointmentTempSp.mp3")
-            toggleState("idle")
+            # toggleState("talk")
+            # playsound("audioBase/appointmentTempSp.mp3")
+            # toggleState("idle")
+            ttsUtil.say("appointmentTempSp.mp3")
+
     if foundAppointment==False:
-        toggleState("talk")
-        playsound("audioBase/noAppointmentSp.mp3")
-        toggleState("idle")
+        # toggleState("talk")
+        # playsound("audioBase/noAppointmentSp.mp3")
+        # toggleState("idle")
+        ttsUtil.say("noAppointmentSp.mp3")
