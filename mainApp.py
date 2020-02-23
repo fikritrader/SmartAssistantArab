@@ -38,13 +38,13 @@ while(True):
         # playsound("audioBase/idleSp.mp3")
         # commandHelper.toggleState("idle")
         ttsUtil.say("idleSp.mp3")
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=0) as source:
         print('speak')
         audio=r.listen(source,phrase_time_limit=3)
     try:
-        text = input('your command : \n')
+        #text = input('your command : \n')
         print('got it will now recognize')
-        #text=r.recognize_google(audio,language='ar')
+        text=r.recognize_google(audio,language='ar')
         print('recognized')
         file=open("misc/debug/yourCommand.txt","w",encoding="utf_8")
         file.write(text)

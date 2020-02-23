@@ -24,7 +24,7 @@ def getStory():
     ttsUtil.say("storyTeller.mp3")
 
     r=sr.Recognizer()
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=0) as source:
         print("say somethng")
         audio=r.listen(source,phrase_time_limit=3)
         print("time over, thanks")
@@ -84,7 +84,7 @@ def getNews():
 
             os.remove('audioBase/newsAnswer'+str(i)+'.mp3')
             r=sr.Recognizer()
-            with sr.Microphone(device_index=1) as source:
+            with sr.Microphone(device_index=0) as source:
                 print('say it')
                 audio=r.listen(source,phrase_time_limit=3)
                 print('got it')
@@ -121,7 +121,7 @@ def getRecipeByComp():
     # commandHelper.toggleState("idle")
     ttsUtil.say('recipeApiStarter.mp3')
 
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=0) as source:
         print('say the ingredient')
         audio=r.listen(source,phrase_time_limit=3)
         print('got it')
@@ -164,7 +164,7 @@ def getMovieByTitle():
     # commandHelper.toggleState("idle")
     ttsUtil.say('movieApiStarter.mp3')
 
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=0) as source:
         print('say it')
         audio=r.listen(source,phrase_time_limit=3)
         print('got it')
@@ -220,7 +220,7 @@ def utilityState():
     # playsound("audioBase/utilityState.mp3")
     # commandHelper.toggleState("idle")
     ttsUtil.say('utilityState.mp3')
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=0) as source:
         print('say it')
         audio=r.listen(source,phrase_time_limit=3)
         print('got it')
